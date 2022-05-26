@@ -29,4 +29,12 @@ public class RecordBookEntity implements Serializable {
     public void setCode(int code) {
         this.code = code;
     }
+
+    @Override
+    public String toString() {
+        return "RecordBookEntity{" +
+                "id=" + id +
+                ", code=" + code +
+                '}';
+    }
 }

@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Table(name = "student")
 public class StudentEntity implements Serializable {
     private Long id;
-    private String grup;
+    private String ac_group;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -20,21 +20,11 @@ public class StudentEntity implements Serializable {
         this.id = id;
     }
 
-//    @Basic
-//    @Column(name = "group", nullable = false, insertable = true, updatable = true, length = 10)
-//    public String getGroup() {
-//        return group;
-//    }
-//
-//    public void setGroup(String group) {
-//        this.group = group;
-//    }
-
     @Basic
-    @Column(name = "grup", nullable = false, insertable = true, updatable = true, length = 40)
-    public String getGrup() { return grup; }
+    @Column(name = "ac_group", nullable = false, insertable = true, updatable = true, length = 40)
+    public String getAc_group() { return ac_group; }
 
-    public void setGrup(String grup) { this.grup = grup; }
+    public void setAc_group(String ac_group) { this.ac_group = ac_group; }
 
     /*
      * Many To One
@@ -54,4 +44,14 @@ public class StudentEntity implements Serializable {
     public PersonEntity getPerson() { return person; }
 
     public void setPerson(PersonEntity person) { this.person = person; }
+
+    @Override
+    public String toString() {
+        return "StudentEntity{" +
+                "id=" + id +
+                ", person=" + this.getPerson() +
+                ", recordBook=" + this.getRecordBook() +
+                ", ac_group='" + ac_group + '\'' +
+                '}';
+    }
 }

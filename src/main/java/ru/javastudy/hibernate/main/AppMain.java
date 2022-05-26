@@ -3,14 +3,16 @@ package ru.javastudy.hibernate.main;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import ru.javastudy.hibernate.dao.*;
-import ru.javastudy.hibernate.dao.implementations.ContactDAOImpl;
 import ru.javastudy.hibernate.dao.implementations.PersonDAOImpl;
 import ru.javastudy.hibernate.dao.implementations.RecordBookDAOImpl;
-import ru.javastudy.hibernate.dao.interfaces.PersonDAO;
+import ru.javastudy.hibernate.dao.implementations.StudentDAOImpl;
 import ru.javastudy.hibernate.utils.HibernateSessionFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceUnit;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.Collections;
 import java.util.List;
 
@@ -83,8 +85,8 @@ public class AppMain {
         for (int i = 0; i < 10; i++) {
             StudentEntity studentEntity = new StudentEntity();
 
-            String group = "РИМ-"+(100000 + (int) ( Math.random() * 899999 ));
-            studentEntity.setGrup(group);
+            String ac_group = "РИМ-"+(100000 + (int) ( Math.random() * 899999 ));
+            studentEntity.setAc_group(ac_group);
 
             studentEntity.setPerson(persons.get(i));
 
@@ -102,6 +104,28 @@ public class AppMain {
         session.getTransaction().commit();
 
         // Задание 1: конец
+
+        // Задание 2: начало
+
+        System.out.println("Find students with A: start (HQL)");
+        //Поиск студентов с буквой А в ФИО с использованием HQL
+        StudentDAOImpl studentDAO = new StudentDAOImpl();
+        studentDAO.setSession(session);
+        List<StudentEntity> studentsWithA = studentDAO.findСontainsA();
+        for (StudentEntity student : studentsWithA) {
+            System.out.println(student);
+        }
+        System.out.println("Find students with A: completed (HQL)");
+
+        System.out.println("Find students without recordBook: start (HQL)");
+        //Поиск студентов без зачётной книжки с использованием HQL
+        List<StudentEntity> studentsWithoutRecordBook = studentDAO.findNullRecordBook();
+        for (StudentEntity student : studentsWithoutRecordBook) {
+            System.out.println(student);
+        }
+        System.out.println("Find students without recordBook: completed (HQL)");
+
+        // Задание 2: конец
 
 //        ContactEntity contactEntity = new ContactEntity();
 //
@@ -136,6 +160,7 @@ public class AppMain {
         tx.commit();
         session.close();
 
+        System.out.println("Criteria");
     }
 
     private static void listContactsWithDetail(List<ContactEntity> contacts) {

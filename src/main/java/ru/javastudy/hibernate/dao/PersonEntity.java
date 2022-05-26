@@ -62,4 +62,16 @@ public class PersonEntity implements Serializable{
 
     public void setMiddleName(String middleName) { this.middleName = middleName; }
 
+    @Override
+    public String toString() {
+        return "PersonEntity{" +
+                "id=" + id +
+                ", passportNumber=" + passportNumber +
+                ", passportSeria=" + passportSeria +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                '}';
+    }
+
 }
