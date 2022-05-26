@@ -117,6 +117,14 @@ public class AppMain {
         }
         System.out.println("Find students with A: completed (HQL)");
 
+        System.out.println("Find students with A: start (Criteria)");
+        //Поиск студентов с буквой А в ФИО с использованием Criteria
+        List<StudentEntity> studentsWithACriteria = studentDAO.findСontainsAUsingCriteria();
+        for (StudentEntity student : studentsWithACriteria) {
+            System.out.println(student);
+        }
+        System.out.println("Find students with A: completed (Criteria)");
+
         System.out.println("Find students without recordBook: start (HQL)");
         //Поиск студентов без зачётной книжки с использованием HQL
         List<StudentEntity> studentsWithoutRecordBook = studentDAO.findNullRecordBook();
@@ -124,6 +132,14 @@ public class AppMain {
             System.out.println(student);
         }
         System.out.println("Find students without recordBook: completed (HQL)");
+
+        System.out.println("Find students without recordBook: start (Criteria)");
+        //Поиск студентов без зачётной книжки с использованием Criteria
+        List<StudentEntity> studentsWithoutRecordBookCriteria = studentDAO.findNullRecordBookCriteria();
+        for (StudentEntity student : studentsWithoutRecordBookCriteria) {
+            System.out.println(student);
+        }
+        System.out.println("Find students without recordBook: completed (Criteria)");
 
         // Задание 2: конец
 
