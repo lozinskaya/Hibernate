@@ -1,8 +1,6 @@
 package ru.javastudy.hibernate.dao.implementations;
 
-import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 import ru.javastudy.hibernate.dao.StudentEntity;
 import ru.javastudy.hibernate.dao.interfaces.StudentDAO;
 
@@ -24,37 +22,40 @@ public class StudentDAOImpl implements StudentDAO {
                 setParameter("id", id).uniqueResult();
     }
 
-    public List<StudentEntity> findСontainsA() {
+    public List findСontainsA() {
         return session.createQuery(
                 "select s " +
                            "from StudentEntity s " +
                            "where s.person.lastName like :par " +
                                 "or s.person.firstName like :par " +
-                                "or s.person.middleName like :par ").
+                                "or s.person.middleName like :par " +
+                                "order by s.person.id").
                 setParameter("par", "%а%").list();
     }
 
     public List<StudentEntity> findСontainsAUsingCriteria() {
-        Criteria criteria = session.createCriteria(StudentEntity.class);
-        criteria.createAlias("person", "person");
-        criteria.add(Restrictions.like("person.firstName","%а%"));
-        criteria.add(Restrictions.or(
-                Restrictions.like("person.lastName","%а%"))
-        );
-        criteria.add(Restrictions.or(
-                Restrictions.like("person.middleName","%а%"))
-        );
-
-        return criteria.list();
-
-//        CriteriaBuilder cb = session.getCriteriaBuilder();
-//        CriteriaQuery<StudentEntity> criteria = cb.createQuery(StudentEntity.class);
-//        Root<StudentEntity> root = criteria.from(StudentEntity.class);
-//        criteria.select(root);
-//        criteria.where(cb.like(root.get("person").get("lastName"),"%а%"));
-//        criteria.orderBy(cb.asc(root.get("person").get("id")));
+//        Criteria criteria = session.createCriteria(StudentEntity.class);
+//        criteria.createAlias("person", "person");
+//        criteria.add(Restrictions.like("person.firstName","%а%"));
+//        criteria.add(Restrictions.or(
+//                Restrictions.like("person.lastName","%а%"))
+//        );
+//        criteria.add(Restrictions.or(
+//                Restrictions.like("person.middleName","%а%"))
+//        );
 //
-//        return session.createQuery(criteria).getResultList();
+//        return criteria.list();
+
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<StudentEntity> criteria = cb.createQuery(StudentEntity.class);
+        Root<StudentEntity> root = criteria.from(StudentEntity.class);
+        criteria.select(root);
+        criteria.where(cb.or(cb.like(root.get("person").<String>get("lastName"),"%а%")));
+        criteria.where(cb.or(cb.like(root.get("person").<String>get("firstName"),"%а%")));
+        criteria.where(cb.or(cb.like(root.get("person").<String>get("middleName"),"%а%")));
+        criteria.orderBy(cb.asc(root.get("person").get("id")));
+
+        return session.createQuery(criteria).getResultList();
     }
 
     public List<StudentEntity> findNullRecordBookCriteria() {
