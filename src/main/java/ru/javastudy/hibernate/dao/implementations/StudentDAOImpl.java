@@ -50,9 +50,11 @@ public class StudentDAOImpl implements StudentDAO {
         CriteriaQuery<StudentEntity> criteria = cb.createQuery(StudentEntity.class);
         Root<StudentEntity> root = criteria.from(StudentEntity.class);
         criteria.select(root);
-        criteria.where(cb.or(cb.like(root.get("person").<String>get("lastName"),"%а%")));
-        criteria.where(cb.or(cb.like(root.get("person").<String>get("firstName"),"%а%")));
-        criteria.where(cb.or(cb.like(root.get("person").<String>get("middleName"),"%а%")));
+        criteria.where(cb.or(
+                cb.like(root.get("person").<String>get("lastName"),"%а%"),
+                cb.like(root.get("person").<String>get("firstName"),"%а%"),
+                cb.like(root.get("person").<String>get("middleName"),"%а%")
+        ));
         criteria.orderBy(cb.asc(root.get("person").get("id")));
 
         return session.createQuery(criteria).getResultList();
