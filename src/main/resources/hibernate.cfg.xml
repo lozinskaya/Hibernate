@@ -16,13 +16,13 @@
     <!-- DB schema will be updated if needed -->
     <property name="hbm2ddl.auto">create</property>
     <!-- NOTE that after automapping with IDEA property username and password will delete -->
-        <mapping class="ru.javastudy.hibernate.dao.ContactEntity"/>
-        <mapping class="ru.javastudy.hibernate.dao.ContactHobbyDetailEntity"/>
-        <mapping class="ru.javastudy.hibernate.dao.ContactTelDetailEntity"/>
-        <mapping class="ru.javastudy.hibernate.dao.HobbyEntity"/>
-        <mapping class="ru.javastudy.hibernate.dao.PersonEntity"/>
-        <mapping class="ru.javastudy.hibernate.dao.StudentEntity"/>
-        <mapping class="ru.javastudy.hibernate.dao.RecordBookEntity"/>
+        <mapping class="ru.javastudy.hibernate.entity.ContactEntity"/>
+        <mapping class="ru.javastudy.hibernate.entity.ContactHobbyDetailEntity"/>
+        <mapping class="ru.javastudy.hibernate.entity.ContactTelDetailEntity"/>
+        <mapping class="ru.javastudy.hibernate.entity.HobbyEntity"/>
+        <mapping class="ru.javastudy.hibernate.entity.PersonEntity"/>
+        <mapping class="ru.javastudy.hibernate.entity.StudentEntity"/>
+        <mapping class="ru.javastudy.hibernate.entity.RecordBookEntity"/>
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
     </session-factory>

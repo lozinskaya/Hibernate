@@ -1,6 +1,6 @@
 package ru.javastudy.hibernate.dao.interfaces;
 
-import ru.javastudy.hibernate.dao.ContactEntity;
+import ru.javastudy.hibernate.entity.ContactEntity;
 
 import java.util.List;
 

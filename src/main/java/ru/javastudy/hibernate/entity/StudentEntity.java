@@ -1,9 +1,14 @@
-package ru.javastudy.hibernate.dao;
+package ru.javastudy.hibernate.entity;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import ru.javastudy.hibernate.entity.listeners.StudentEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@EntityListeners(StudentEntityListener.class)
 @Table(name = "student")
 public class StudentEntity implements Serializable {
     private Long id;
@@ -33,13 +38,15 @@ public class StudentEntity implements Serializable {
     private RecordBookEntity recordBook;
     private PersonEntity person;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "record_book_id")
     public RecordBookEntity getRecordBook() { return recordBook; }
 
     public void setRecordBook(RecordBookEntity recordBook) { this.recordBook = recordBook; }
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "person_id")
     public PersonEntity getPerson() { return person; }
 

@@ -1,9 +1,12 @@
-package ru.javastudy.hibernate.dao;
+package ru.javastudy.hibernate.entity;
+
+import ru.javastudy.hibernate.entity.listeners.PersonEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@EntityListeners(PersonEntityListener.class)
 @Table(name = "person")
 public class PersonEntity implements Serializable{
     private Long id;

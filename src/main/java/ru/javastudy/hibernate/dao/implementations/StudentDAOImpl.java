@@ -1,7 +1,7 @@
 package ru.javastudy.hibernate.dao.implementations;
 
 import org.hibernate.Session;
-import ru.javastudy.hibernate.dao.StudentEntity;
+import ru.javastudy.hibernate.entity.StudentEntity;
 import ru.javastudy.hibernate.dao.interfaces.StudentDAO;
 
 import javax.persistence.criteria.CriteriaBuilder;

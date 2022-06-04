@@ -1,4 +1,4 @@
-package ru.javastudy.hibernate.dao;
+package ru.javastudy.hibernate.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Id;

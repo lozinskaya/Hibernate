@@ -2,17 +2,14 @@ package ru.javastudy.hibernate.main;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import ru.javastudy.hibernate.dao.*;
 import ru.javastudy.hibernate.dao.implementations.PersonDAOImpl;
 import ru.javastudy.hibernate.dao.implementations.RecordBookDAOImpl;
 import ru.javastudy.hibernate.dao.implementations.StudentDAOImpl;
+import ru.javastudy.hibernate.entity.*;
 import ru.javastudy.hibernate.utils.HibernateSessionFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceUnit;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.util.Collections;
 import java.util.List;
 
@@ -143,6 +140,20 @@ public class AppMain {
 
         // Задание 2: конец
 
+        // Задание 3: начало
+
+        Transaction tx = session.beginTransaction();
+        List<StudentEntity> students = studentDAO.findAll();
+        System.out.println("Delete all: start");
+        for (StudentEntity student : students) {
+            session.remove(student);
+        }
+        System.out.println("Delete all: completed");
+
+        tx.commit();
+
+        // Задание 3: конец
+
 //        ContactEntity contactEntity = new ContactEntity();
 //
 //        contactEntity.setBirthDate(new java.util.Date());
@@ -164,19 +175,7 @@ public class AppMain {
 //        ContactDAOImpl contactDAO = new ContactDAOImpl();
 //        contactDAO.setSession(session);
 
-        Transaction tx = session.beginTransaction();
-
-//        List<ContactEntity> contacts = contactDAO.findAll();
-//        for (ContactEntity contact : contacts) {
-//            System.out.println(contact);
-//        }
-//
-//        listContactsWithDetail(contacts);
-
-        tx.commit();
         session.close();
-
-        System.out.println("Criteria");
     }
 
     private static void listContactsWithDetail(List<ContactEntity> contacts) {
